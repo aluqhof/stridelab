@@ -3,7 +3,7 @@
 import { useAdvancedStats } from "@/hooks/use-strava";
 import { WeeklyVolumeChart } from "./weekly-volume-chart";
 import { PaceProgressionChart } from "./pace-progression-chart";
-import { YearComparisonCard } from "./year-comparison";
+import { MonthComparisonCard } from "./month-comparison";
 import { ZoneDistributionChart } from "./zone-distribution-chart";
 import { TimeAnalysis } from "./time-analysis";
 import { AerobicDecoupling } from "./aerobic-decoupling";
@@ -76,7 +76,7 @@ export function AdvancedStatsSection() {
           </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <YearComparisonCard data={data.yearComparison} />
+          <MonthComparisonCard data={data.monthComparison} />
           <GoalsTracker goals={data.goals} />
         </div>
       </div>

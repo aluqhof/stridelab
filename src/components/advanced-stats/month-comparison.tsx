@@ -1,9 +1,9 @@
 "use client";
 
-import type { YearComparison } from "@/types/strava";
+import type { MonthComparison } from "@/types/strava";
 
-interface YearComparisonProps {
-  data: YearComparison;
+interface MonthComparisonProps {
+  data: MonthComparison;
 }
 
 function formatDistance(meters: number): string {
@@ -15,53 +15,55 @@ function formatTime(seconds: number): string {
   return `${hours}h`;
 }
 
-export function YearComparisonCard({ data }: YearComparisonProps) {
-  const { thisYear, lastYear } = data;
+export function MonthComparisonCard({ data }: MonthComparisonProps) {
+  const { thisMonth, lastMonth } = data;
 
   const calculateChange = (current: number, previous: number): number => {
     if (previous === 0) return current > 0 ? 100 : 0;
     return ((current - previous) / previous) * 100;
   };
 
+  const now = new Date();
+  const currentMonthName = now.toLocaleDateString("en-US", { month: "short" });
+  const lastMonthName = new Date(now.getFullYear(), now.getMonth() - 1, 1).toLocaleDateString("en-US", { month: "short" });
+
   const stats = [
     {
       label: "Distance",
-      current: formatDistance(thisYear.distance) + " km",
-      previous: formatDistance(lastYear.distance) + " km",
-      change: calculateChange(thisYear.distance, lastYear.distance),
+      current: formatDistance(thisMonth.distance) + " km",
+      previous: formatDistance(lastMonth.distance) + " km",
+      change: calculateChange(thisMonth.distance, lastMonth.distance),
       icon: "📏",
     },
     {
       label: "Time",
-      current: formatTime(thisYear.time),
-      previous: formatTime(lastYear.time),
-      change: calculateChange(thisYear.time, lastYear.time),
+      current: formatTime(thisMonth.time),
+      previous: formatTime(lastMonth.time),
+      change: calculateChange(thisMonth.time, lastMonth.time),
       icon: "⏱️",
     },
     {
       label: "Activities",
-      current: thisYear.activities.toString(),
-      previous: lastYear.activities.toString(),
-      change: calculateChange(thisYear.activities, lastYear.activities),
+      current: thisMonth.activities.toString(),
+      previous: lastMonth.activities.toString(),
+      change: calculateChange(thisMonth.activities, lastMonth.activities),
       icon: "🏃",
     },
     {
       label: "Elevation",
-      current: Math.round(thisYear.elevation) + " m",
-      previous: Math.round(lastYear.elevation) + " m",
-      change: calculateChange(thisYear.elevation, lastYear.elevation),
+      current: Math.round(thisMonth.elevation) + " m",
+      previous: Math.round(lastMonth.elevation) + " m",
+      change: calculateChange(thisMonth.elevation, lastMonth.elevation),
       icon: "⛰️",
     },
   ];
-
-  const currentYear = new Date().getFullYear();
 
   return (
     <div className="rounded-xl bg-white border border-gray-200 shadow-sm p-3 sm:p-4 h-full flex flex-col">
       <div className="flex items-center gap-2 mb-3">
         <span className="w-2 h-2 rounded-full bg-purple-500" />
         <h3 className="text-sm sm:text-base text-gray-500 uppercase tracking-wider font-bold">
-          {currentYear} vs {currentYear - 1}
+          {currentMonthName} vs {lastMonthName}
         </h3>
       </div>
 
@@ -86,14 +88,14 @@ export function YearComparisonCard({ data }: YearComparisonProps) {
                 <p className="text-lg sm:text-xl font-bold text-gray-900">
                   {stat.current}
                 </p>
-                <p className="text-[9px] sm:text-[10px] text-gray-400">{currentYear}</p>
+                <p className="text-[9px] sm:text-[10px] text-gray-400">{currentMonthName}</p>
               </div>
               <div className="text-right">
                 <p className="text-sm sm:text-base text-gray-500">{stat.previous}</p>
-                <p className="text-[9px] sm:text-[10px] text-gray-400">{currentYear - 1}</p>
+                <p className="text-[9px] sm:text-[10px] text-gray-400">{lastMonthName}</p>
               </div>
             </div>
-            
+
             <div className="mt-2 h-1.5 bg-gray-200 rounded-full overflow-hidden">
               <div
                 className={`h-full rounded-full ${stat.change >= 0 ? "bg-green-500" : "bg-red-500"}`}

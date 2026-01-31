@@ -305,14 +305,14 @@ export interface MonthlyTrendData {
   elevation: number;
 }
 
-export interface YearComparison {
-  thisYear: {
+export interface MonthComparison {
+  thisMonth: {
     distance: number;
     time: number;
     activities: number;
     elevation: number;
   };
-  lastYear: {
+  lastMonth: {
     distance: number;
     time: number;
     activities: number;
@@ -384,7 +384,7 @@ export interface TrainingBalanceData {
 export interface AdvancedStatsData {
   weeklyData: WeeklyTrendData[];
   monthlyData: MonthlyTrendData[];
-  yearComparison: YearComparison;
+  monthComparison: MonthComparison;
   zoneDistribution: ZoneDistributionWeek[];
   timeOfDayData: TimeOfDayStats[];
   dayOfWeekData: DayOfWeekStats[];

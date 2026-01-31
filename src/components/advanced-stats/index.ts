@@ -1,7 +1,7 @@
 export { AdvancedStatsSection } from "./advanced-stats-section";
 export { WeeklyVolumeChart } from "./weekly-volume-chart";
 export { PaceProgressionChart } from "./pace-progression-chart";
-export { YearComparisonCard } from "./year-comparison";
+export { MonthComparisonCard } from "./month-comparison";
 export { ZoneDistributionChart } from "./zone-distribution-chart";
 export { TimeAnalysis } from "./time-analysis";
 export { PRProgressionChart } from "./pr-progression";
