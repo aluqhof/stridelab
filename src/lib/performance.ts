@@ -7,8 +7,8 @@
 export const RACE_DISTANCES = {
   "5K": 5000,
   "10K": 10000,
-  "Media Maratón": 21097.5,
-  "Maratón": 42195,
+  "Half Marathon": 21097.5,
+  "Marathon": 42195,
 } as const;
 
 /**
@@ -730,7 +730,7 @@ export const PR_DISTANCES = {
   "5K": 5000,
   "10K": 10000,
   "Media": 21097.5,
-  "Maratón": 42195,
+  "Marathon": 42195,
 } as const;
 
 export interface PersonalRecord {
@@ -766,7 +766,7 @@ export function findPersonalRecords(
     "5K": [0.95, 1.10],      // 4750m - 5500m
     "10K": [0.95, 1.10],     // 9500m - 11000m
     "Media": [0.98, 1.05],   // ~20700m - 22150m
-    "Maratón": [0.98, 1.03], // ~41350m - 43460m
+    "Marathon": [0.98, 1.03], // ~41350m - 43460m
   };
 
   for (const [name, targetDistance] of Object.entries(PR_DISTANCES)) {
